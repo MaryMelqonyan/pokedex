@@ -2,6 +2,7 @@
   "name": "pokedex_app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mary-mo.github.io/pokedex/build",
   "dependencies": {
     "normalize.css": "^7.0.0",
     "react": "^16.2.0",
