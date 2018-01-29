@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import '../index.css';
 
-class Loading extends Component{
+class Loading extends Component {
   render() {
-    return(
+    return (
       <div className="loading">
-        <div className="loader"></div>
+        <div className="loader" />
         <p>Loading...</p>
       </div>
-    )
+    );
   }
 }
 

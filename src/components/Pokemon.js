@@ -13,28 +13,34 @@ class Pokemon extends Component {
       .then(data => {
         this.props.endFetchingSinglePokemon(data);
       });
-
   }
 
   render() {
     const pokemon = this.props.pokemon;
     if (!pokemon) {
-      return <div className="pokemon"><Loading /></div>;
+      return (
+        <div className="pokemon">
+          <Loading />
+        </div>
+      );
     }
 
     const pokemonTypes = pokemon.types.map(t => t.type.name).join(', ');
-    console.log(pokemonTypes)
     return (
       <div className="pokemon">
         {pokemon.sprites.front_default && (
           <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         )}
-        <span className="pokemon-name">Name: {pokemon.name} Type: {pokemonTypes}</span>
+        <span className="pokemon-name">
+          <b>Name:</b> {pokemon.name}
+        </span>
+        <span className="pokemon-type">
+          <b>Type:</b> {pokemonTypes}
+        </span>
       </div>
     );
   }
 }
-
 
 const mapStateToProps = (state, props) => {
   return {
@@ -42,12 +48,11 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    endFetchingSinglePokemon: (response) => {
-      dispatch(endFetchingSinglePokemon(response))
-    }
-
-  }
-}
+    endFetchingSinglePokemon: response => {
+      dispatch(endFetchingSinglePokemon(response));
+    },
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Pokemon);

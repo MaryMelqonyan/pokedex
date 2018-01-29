@@ -3,8 +3,8 @@ import logo from '../logo.svg';
 import '../index.css';
 
 class Header extends Component {
-  render (){
-    return(
+  render() {
+    return (
       <div className="header">
         <img src={logo} alt="logo" />
         <p>Pokedex</p>

@@ -51,8 +51,7 @@ class PokemonList extends Component {
   }
 }
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     pageNumber: state.pokemons.pageNumber,
     pokemons: state.pokemons.pokemons,
@@ -60,15 +59,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    startFetchingPokemons: (pageNumber) => {
+    startFetchingPokemons: pageNumber => {
       dispatch(startFetchingPokemons(pageNumber));
     },
-    endFetchingPokemons: (response) => {
+    endFetchingPokemons: response => {
       dispatch(endFetchingPokemons(response));
-    }
-  }
-}
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonList);

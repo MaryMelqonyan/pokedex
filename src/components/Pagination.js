@@ -27,7 +27,9 @@ class Pagination extends Component {
         >
           ❮ Previous
         </button>
-        <div className="page-number">{this.props.pageNumber} page of {this.props.totalPage}</div>
+        <div className="page-number">
+          {this.props.pageNumber} page of {this.props.totalPage}
+        </div>
       </div>
     );
   }
