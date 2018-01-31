@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Search from './Search';
 import PokemonList from './PokemonList';
 
 class App extends Component {
@@ -8,7 +7,6 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Search />
         <PokemonList />
       </div>
     );
