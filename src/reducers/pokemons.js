@@ -2,6 +2,7 @@ import {
   START_FETCHING_POKEMONS,
   END_FETCHING_POKEMONS,
   END_FETCHING_SINGLE_POKEMON,
+  END_FETCHING_TYPES,
 } from '../actions/pokemons';
 
 const initialState = {
@@ -9,6 +10,7 @@ const initialState = {
   totalPages: null,
   pokemons: null,
   singlePokemons: {},
+  types: [],
 };
 
 export default (state = initialState, action) => {
@@ -25,6 +27,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         singlePokemons: { ...state.singlePokemons, ...{ [action.response.name]: action.response } },
+      };
+    case END_FETCHING_TYPES:
+      return {
+        ...state,
+        types: action.response,
+        // totalPages:
       };
     default:
       return state;

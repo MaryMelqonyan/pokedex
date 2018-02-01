@@ -2,21 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../index.css';
 import Loading from './Loading';
-import { endFetchingSinglePokemon } from '../actions/pokemons';
+import * as pokemonActions from '../actions/pokemons';
 
 class Pokemon extends Component {
-  componentDidMount() {
+    componentDidMount() {
     if (this.props.pokemon) return;
+    this.props.fetchSinglePokemon(this.props.name)
 
-    fetch(`https://pokeapi.co/api/v2/pokemon/${this.props.name}`)
-      .then(response => response.json())
-      .then(data => {
-        this.props.endFetchingSinglePokemon(data);
-      });
-  }
+  //   fetch(`https://pokeapi.co/api/v2/pokemon/${this.props.name}`)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       console.log(data)
+  //       this.props.endFetchingSinglePokemon(data);
+  //     });
+    }
 
   render() {
+
     const pokemon = this.props.pokemon;
+    // console.log("pokemon", pokemon)
     if (!pokemon) {
       return (
         <div className="pokemon">
@@ -48,11 +52,12 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    endFetchingSinglePokemon: response => {
-      dispatch(endFetchingSinglePokemon(response));
-    },
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Pokemon);
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     endFetchingSinglePokemon: response => {
+//       dispatch(endFetchingSinglePokemon(response));
+//     },
+//   };
+// };
+
+export default connect(mapStateToProps, pokemonActions)(Pokemon);

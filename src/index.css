@@ -19,14 +19,12 @@ body {
   width: 40px;
 }
 
-.search {
-  overflow: hidden;
-}
 .search-input {
   margin: 20px;
   float: right;
   display: block;
   width: 150px;
+  height: 35px;
   box-sizing: border-box;
   border: none;
   border-radius: 4px;
@@ -39,6 +37,18 @@ body {
 
 .search-input::placeholder {
   color: #1dbdca;
+}
+
+.type-selector {
+  color: #1dbdca;
+  margin: 20px;
+  height: 35px;
+  float: left;
+  width: 250px;
+  box-sizing: border-box;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .loading {
