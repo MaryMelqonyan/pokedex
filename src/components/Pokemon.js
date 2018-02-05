@@ -5,22 +5,13 @@ import Loading from './Loading';
 import * as pokemonActions from '../actions/pokemons';
 
 class Pokemon extends Component {
-    componentDidMount() {
+  componentDidMount() {
     if (this.props.pokemon) return;
-    this.props.fetchSinglePokemon(this.props.name)
-
-  //   fetch(`https://pokeapi.co/api/v2/pokemon/${this.props.name}`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log(data)
-  //       this.props.endFetchingSinglePokemon(data);
-  //     });
-    }
+    this.props.fetchSinglePokemon(this.props.name);
+  }
 
   render() {
-
     const pokemon = this.props.pokemon;
-    // console.log("pokemon", pokemon)
     if (!pokemon) {
       return (
         <div className="pokemon">
@@ -51,13 +42,5 @@ const mapStateToProps = (state, props) => {
     pokemon: state.pokemons.singlePokemons[props.name],
   };
 };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     endFetchingSinglePokemon: response => {
-//       dispatch(endFetchingSinglePokemon(response));
-//     },
-//   };
-// };
 
 export default connect(mapStateToProps, pokemonActions)(Pokemon);

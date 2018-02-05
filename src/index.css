@@ -51,6 +51,16 @@ body {
   border-radius: 4px;
 }
 
+.number-selector {
+  color: #1dbdca;
+  margin: 20px;
+  height: 35px;
+  box-sizing: border-box;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+}
+
 .loading {
   margin: auto;
   text-align: center;

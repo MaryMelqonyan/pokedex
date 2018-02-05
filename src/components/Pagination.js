@@ -2,26 +2,18 @@ import React, { Component } from 'react';
 import '../index.css';
 
 class Pagination extends Component {
-  handleNextClick = () => {
-    this.props.onNextClick();
-  };
-
-  handlePrevClick = () => {
-    this.props.onPrevClick();
-  };
-
   render() {
     return (
       <div className="prevnext">
         <button
-          onClick={this.handleNextClick}
+          onClick={this.props.onNextClick}
           className="next btn"
           style={{ visibility: this.props.nextShown ? 'visible' : 'hidden' }}
         >
           Next ❯
         </button>
         <button
-          onClick={this.handlePrevClick}
+          onClick={this.props.onPrevClick}
           className="prev btn"
           style={{ visibility: this.props.previousShown ? 'visible' : 'hidden' }}
         >

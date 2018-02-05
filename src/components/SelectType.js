@@ -6,11 +6,6 @@ import * as pokemonActions from '../actions/pokemons';
 class SelectType extends Component {
   componentDidMount() {
     this.props.fechTypes();
-    // fetch('https://pokeapi.co/api/v2/type/')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.setState({types: data.results});
-    //   });
   }
 
   handleChange = event => {
@@ -21,14 +16,10 @@ class SelectType extends Component {
   render() {
     return (
       <div>
-        <select
-          className="type-selector"
-          name="Types"
-          autoFocus
-          onChange={this.handleChange}
-          value={this.props.value}
-        >
-          <option>Select pokemon type</option>
+        <select className="type-selector" name="Types" onChange={this.handleChange} autoFocus>
+          <option disabled selected>
+            Select pokemon type
+          </option>
           {this.props.types.map(type => (
             <option key={type.url} value={type.url}>
               {type.name}

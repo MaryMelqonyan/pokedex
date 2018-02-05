@@ -7,29 +7,20 @@ import Search from './Search';
 import Pagination from './Pagination';
 import Loading from './Loading';
 import * as pokemonActions from '../actions/pokemons';
+import SelectPokemonsNumber from './SelectPokemonsNumber';
 
 class PokemonList extends Component {
   state = { search: '' };
-  // fetchPokemons = pageNumber => {
-  //   fetch(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${(pageNumber - 1) * 20}`)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       this.props.endFetchingPokemons(data);
-  //     });
-  // };
 
   fetchNextPokemons = () => {
-    this.fetchPokemons(this.props.pageNumber + 1);
-    this.props.startFetchingPokemons(this.props.pageNumber + 1);
+    this.props.updatePageNumber(this.props.pageNumber + 1);
   };
 
   fetchPrevPokemons = () => {
-    this.fetchPokemons(this.props.pageNumber - 1);
-    this.props.startFetchingPokemons(this.props.pageNumber - 1);
+    this.props.updatePageNumber(this.props.pageNumber - 1);
   };
 
   componentDidMount() {
-    // this.fetchPokemons(this.props.pageNumber);
     this.props.fetchPokemonsList();
   }
 
@@ -41,32 +32,28 @@ class PokemonList extends Component {
     this.props.fetchPokemonsListByType(url);
   };
 
+  handlePageSelect = perPage => {
+    this.props.updatePerPage(perPage);
+  };
+
   render() {
     if (!this.props.pokemons) {
       return <Loading />;
     }
 
     const pokemons = this.props.pokemons;
-
-    const filteredPokemons = pokemons.filter(pokemon => pokemon.name.startsWith(this.state.search));
-
-    // const filteredPokemons = pokemons.filter(pokemon => {
-    //   let typeIncluded = true;
-    //   if (this.state.type) {
-    //     typeIncluded = false;
-    //     if (singlePokemons[pokemon.name]) {
-    //       typeIncluded = singlePokemons[pokemon.name].types
-    //         .map(t => t.type.name)
-    //         .includes(this.props.type);
-    //     }
-    //   }
-    //   return pokemon.name.startsWith(this.state.search) && typeIncluded;
-    // });
+    const filteredPokemons = pokemons
+      .filter(pokemon => pokemon.name.startsWith(this.state.search))
+      .slice(
+        (this.props.pageNumber - 1) * this.props.perPage,
+        this.props.pageNumber * this.props.perPage
+      );
 
     return (
       <div>
         <Search onSearch={this.handleSearch} value={this.state.search} />
         <SelectType onChange={this.handleTypeSelect} value={this.props.type} />
+        <SelectPokemonsNumber onChange={this.handlePageSelect} />
         <div className="pokemons">
           {filteredPokemons.map(pokemon => <Pokemon key={pokemon.url} name={pokemon.name} />)}
           <Pagination
@@ -90,19 +77,8 @@ const mapStateToProps = state => {
     totalPages: state.pokemons.totalPages,
     singlePokemons: state.pokemons.singlePokemons,
     types: state.pokemons.types,
+    perPage: state.pokemons.perPage,
   };
 };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     startFetchingPokemons: pageNumber => {
-//       dispatch(startFetchingPokemons(pageNumber));
-//     },
-//     endFetchingPokemons: response => {
-//       dispatch(endFetchingPokemons(response));
-//     },
-
-//   };
-// };
 
 export default connect(mapStateToProps, pokemonActions)(PokemonList);
